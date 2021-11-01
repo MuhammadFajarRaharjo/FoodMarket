@@ -1,0 +1,35 @@
+<resources>
+    <string name="app_name">FoodMarket</string>
+
+    <!--    Auth    -->
+    <string name="sign_in">Sign In</string>
+    <string name="subtitle_sign_in">Find your best ever meal</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="subtitle_sign_up">Register and eat</string>
+    <string name="address">Address</string>
+    <string name="subtitle_address">Make sure it’s valid</string>
+    <string name="sign_up_completed">Yeay! Completed</string>
+    <string name="subtitle_sign_up_completed">Now you are able to order\nsome foods as a self-reward</string>
+    
+    <string name="full_name">Full Name</string>
+    <string name="placeholder_full_name">Type your full name</string>
+    <string name="email_address">Email Address</string>
+    <string name="placeholder_email">Type your email address</string>
+    <string name="password">Password</string>
+    <string name="placeholder_password">Type your password</string>
+    <string name="phone_number">Phone No.</string>
+    <string name="placeholder_phone_number">Type your phone number</string>
+    <string name="placeholder_address">Type your address</string>
+    <string name="house_number">House No.</string>
+    <string name="placeholder_house_number">Type your house number</string>
+    <string name="city">City</string>
+    <string name="placeholder_city">Type your city</string>
+
+    <string name="create_new_account">Create New Account</string>
+    <string name="btn_continue">Continue</string>
+    <string name="sign_up_now">Sign Up Now</string>
+    <string name="find_foods">Find Foods</string>
+
+    <!--    Main    -->
+    <string name="subtitle_app_name">Let’s get some foods</string>
+</resources>
