@@ -19,8 +19,11 @@ import androidx.navigation.compose.rememberNavController
 import com.belajar.foodmarket.R
 import com.belajar.foodmarket.presentasion.NavItem
 import com.belajar.foodmarket.presentasion.Screen
-import com.belajar.foodmarket.presentasion.main.food.FoodDetail
+import com.belajar.foodmarket.presentasion.main.home.FoodDetail
 import com.belajar.foodmarket.presentasion.main.home.Home
+import com.belajar.foodmarket.presentasion.main.order.FoodOrderDetails
+import com.belajar.foodmarket.presentasion.main.order.Order
+import com.belajar.foodmarket.presentasion.main.order.SuccessOrder
 import com.belajar.foodmarket.presentasion.ui.theme.FoodMarketTheme
 import com.belajar.foodmarket.presentasion.ui.theme.Manatee
 import com.google.accompanist.pager.ExperimentalPagerApi
@@ -34,14 +37,14 @@ class MainActivity : ComponentActivity() {
                 // A surface container using the 'background' color from the theme
                 Surface(color = MaterialTheme.colors.background) {
                     val navController = rememberNavController()
+                    val itemNavigation = listOf(
+                        NavItem(Screen.Home.route, R.drawable.ic_home),
+                        NavItem(Screen.Order.route, R.drawable.ic_order),
+                        NavItem(Screen.Profile.route, R.drawable.ic_profile),
+                    )
 
                     Scaffold(
                         bottomBar = {
-                            val itemNavigation = listOf(
-                                NavItem(Screen.Home.route, R.drawable.ic_home),
-                                NavItem(Screen.Order.route, R.drawable.ic_order),
-                                NavItem(Screen.Profile.route, R.drawable.ic_profile),
-                            )
                             when (navController.currentDestination?.route) {
                                 Screen.Order.route,
                                 Screen.Profile.route,
@@ -56,9 +59,12 @@ class MainActivity : ComponentActivity() {
                             startDestination = Screen.Home.route
                         ) {
                             composable(Screen.Home.route) { Home(navController) }
-                            composable(Screen.Order.route) {}
+                            composable(Screen.Order.route) { Order(navController) }
                             composable(Screen.Profile.route) {}
                             composable(Screen.FoodDetail.route) { FoodDetail(navController) }
+                            composable(Screen.PaymentAndAddressDetails.route) { FoodOrderDetails(navController) }
+                            composable(Screen.ProgressOrderDetails.route) { FoodOrderDetails(navController) }
+                            composable(Screen.SuccessOrder.route) { SuccessOrder(navController) }
                         }
                     }
                 }
@@ -68,7 +74,7 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun BottomNavBar(navController: NavHostController, itemNavigation: List<NavItem>) {
+private fun BottomNavBar(navController: NavHostController, itemNavigation: List<NavItem>) {
     BottomNavigation(backgroundColor = MaterialTheme.colors.onPrimary) {
         val navBackStackEntry by navController.currentBackStackEntryAsState()
         val currentDestination = navBackStackEntry?.destination
@@ -106,7 +112,7 @@ fun BottomNavBar(navController: NavHostController, itemNavigation: List<NavItem>
 
 @Preview
 @Composable
-fun PreviewBottomNavBar() {
+private fun PreviewBottomNavBar() {
     val itemNavigation = listOf(
         NavItem(Screen.Home.route, R.drawable.ic_home),
         NavItem(Screen.Order.route, R.drawable.ic_order),

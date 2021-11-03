@@ -20,6 +20,7 @@ fun ButtonCustom(
     shapes: CornerBasedShape = Shapes.medium,
     backgroundColor: Color = MaterialTheme.colors.primary, modifier: Modifier = Modifier,
     textColor: Color = MaterialTheme.colors.onSecondary,
+    contentPadding: PaddingValues = PaddingValues(vertical = 14.dp),
     onClick: () -> Unit
 ) {
     Button(
@@ -28,6 +29,6 @@ fun ButtonCustom(
         shape = shapes,
         colors = ButtonDefaults.buttonColors(backgroundColor = backgroundColor),
         modifier = modifier,
-        contentPadding = PaddingValues(vertical = 14.dp)
+        contentPadding = contentPadding
     )
 }

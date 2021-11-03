@@ -32,7 +32,7 @@ fun SignUpAddress(navController: NavController) {
                 title = stringResource(id = R.string.address),
                 subtitle = stringResource(id = R.string.subtitle_address),
                 icon = Icons.Default.ArrowBackIos,
-                onClick = { navController.navigateUp() }
+                iconOnClick = { navController.navigateUp() }
             )
         }
     ) {

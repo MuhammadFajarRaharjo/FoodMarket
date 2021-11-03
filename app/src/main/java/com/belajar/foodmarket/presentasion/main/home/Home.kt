@@ -16,7 +16,6 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -27,6 +26,7 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.belajar.foodmarket.R
 import com.belajar.foodmarket.presentasion.Screen
+import com.belajar.foodmarket.presentasion.component.ItemFood
 import com.belajar.foodmarket.presentasion.component.RatingStar
 import com.belajar.foodmarket.presentasion.component.TopSection
 import com.belajar.foodmarket.presentasion.ui.theme.FoodMarketTheme
@@ -46,7 +46,7 @@ fun Home(navController: NavController) {
                 title = stringResource(id = R.string.app_name),
                 subtitle = stringResource(id = R.string.subtitle_app_name),
                 image = R.drawable.audrey_fretz_kyuityoae9m_unsplash,
-                onClick = {}
+                imageOnClick = {}
             )
         }
     ) {
@@ -75,6 +75,7 @@ fun Home(navController: NavController) {
                     }
                 }
             }
+
             item {
                 ScrollableTabRow(
                     selectedTabIndex = pagerState.currentPage,
@@ -99,8 +100,7 @@ fun Home(navController: NavController) {
                         )
                     }
                 }
-            }
-            item {
+
                 HorizontalPager(
                     count = list.size,
                     state = pagerState,
@@ -114,32 +114,59 @@ fun Home(navController: NavController) {
                     ) {
                         when (page) {
                             0 -> {
-                                repeat(page + 20) {
+                                repeat(20) {
                                     ItemFood(
-                                        rating = page + 1f,
-                                        modifier = Modifier.padding(top = 16.dp)
+                                        modifier = Modifier.padding(top = 16.dp),
+                                        onClick = { navController.navigate(Screen.FoodDetail.route) },
+                                        text = "Food No. $it",
+                                        subtitle = "IDR: 25.000",
+                                        image = R.drawable.image_example_food
                                     ) {
-                                        navController.navigate(Screen.FoodDetail.route)
+                                        RatingStar(rating = it + 1)
+                                        Spacer(modifier = Modifier.width(5.dp))
+                                        Text(
+                                            text = (it + 1f).toString(),
+                                            style = MaterialTheme.typography.caption.copy(fontSize = 13.sp),
+                                            color = Manatee
+                                        )
                                     }
                                 }
                             }
                             1 -> {
-                                repeat(page + 1) {
+                                repeat(10) {
                                     ItemFood(
-                                        rating = page + 1f,
-                                        modifier = Modifier.padding(top = 16.dp)
+                                        modifier = Modifier.padding(top = 16.dp),
+                                        onClick = { navController.navigate(Screen.FoodDetail.route) },
+                                        text = "Food No. $it",
+                                        subtitle = "IDR: 25.000",
+                                        image = R.drawable.image_example_food
                                     ) {
-                                        navController.navigate(Screen.FoodDetail.route)
+                                        RatingStar(rating = page + 1)
+                                        Spacer(modifier = Modifier.width(5.dp))
+                                        Text(
+                                            text = (page + 1).toString(),
+                                            style = MaterialTheme.typography.caption.copy(fontSize = 13.sp),
+                                            color = Manatee
+                                        )
                                     }
                                 }
                             }
                             2 -> {
-                                repeat(page + 1) {
+                                repeat(5) {
                                     ItemFood(
-                                        rating = page + 1f,
-                                        modifier = Modifier.padding(top = 16.dp)
+                                        modifier = Modifier.padding(top = 16.dp),
+                                        onClick = { navController.navigate(Screen.FoodDetail.route) },
+                                        text = "Food No. $it",
+                                        subtitle = "IDR: 25.000",
+                                        image = R.drawable.image_example_food
                                     ) {
-                                        navController.navigate(Screen.FoodDetail.route)
+                                        RatingStar(rating = page + 1)
+                                        Spacer(modifier = Modifier.width(5.dp))
+                                        Text(
+                                            text = (page + 1).toString(),
+                                            style = MaterialTheme.typography.caption.copy(fontSize = 13.sp),
+                                            color = Manatee
+                                        )
                                     }
                                 }
                             }
@@ -148,45 +175,6 @@ fun Home(navController: NavController) {
                 }
             }
         }
-    }
-}
-
-@Composable
-fun ItemFood(rating: Float, modifier: Modifier = Modifier, onClick: () -> Unit) {
-    Row(modifier = modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
-        Card(
-            modifier = Modifier
-                .size(60.dp)
-                .clickable { onClick() },
-            backgroundColor = Color.LightGray,
-            shape = Shapes.medium,
-            elevation = 0.dp
-        ) {
-            Image(
-                painter = painterResource(id = R.drawable.image_example_food),
-                contentDescription = "Image food",
-                contentScale = ContentScale.Crop
-            )
-        }
-        Spacer(modifier = Modifier.width(12.dp))
-
-        Column(modifier = Modifier
-            .weight(1f)
-            .clickable { onClick() }) {
-            Text(text = "Cherry Healthy", style = MaterialTheme.typography.body1)
-            Text(
-                text = "IDR 25.000",
-                style = MaterialTheme.typography.caption.copy(fontSize = 13.sp),
-                color = Color.LightGray
-            )
-        }
-        RatingStar(rating = rating.toInt())
-        Spacer(modifier = Modifier.width(5.dp))
-        Text(
-            text = rating.toString(),
-            style = MaterialTheme.typography.caption,
-            color = Manatee
-        )
     }
 }
 

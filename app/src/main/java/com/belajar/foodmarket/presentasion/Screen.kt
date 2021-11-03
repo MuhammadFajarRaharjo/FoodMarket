@@ -13,6 +13,9 @@ sealed class Screen(val route: String) {
     object Order : Screen("order")
     object Profile : Screen("profile")
 
-    /* Food */
+    /* Food and Order */
     object FoodDetail : Screen("food_detail")
+    object PaymentAndAddressDetails : Screen("payment_and_address_detail")
+    object ProgressOrderDetails : Screen("progress_order_detail")
+    object SuccessOrder : Screen("success_order")
 }

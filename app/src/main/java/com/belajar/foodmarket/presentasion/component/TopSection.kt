@@ -49,12 +49,12 @@ fun TopSection(
     title: String,
     subtitle: String,
     icon: ImageVector,
-    onClick: () -> Unit
+    iconOnClick: () -> Unit
 ) {
     TopAppBar(
         backgroundColor = MaterialTheme.colors.onPrimary,
         navigationIcon = {
-            IconButton(onClick = onClick, modifier = Modifier.padding(start = 5.dp)) {
+            IconButton(onClick = iconOnClick, modifier = Modifier.padding(start = 5.dp)) {
                 Icon(imageVector = icon, contentDescription = "Navigation")
             }
         },
@@ -80,7 +80,7 @@ fun TopSection(
     title: String,
     subtitle: String,
     image: Int,
-    onClick: () -> Unit
+    imageOnClick: () -> Unit
 ) {
     TopAppBar(
         backgroundColor = MaterialTheme.colors.onPrimary,
@@ -91,7 +91,7 @@ fun TopSection(
                 modifier = Modifier
                     .padding(end = 15.dp)
                     .size(50.dp)
-                    .clickable { onClick() }
+                    .clickable { imageOnClick() }
             ) {
                 Image(
                     painter = painterResource(id = image),
@@ -119,28 +119,28 @@ fun TopSection(
 
 @Preview
 @Composable
-fun PreviewTopSection() {
+private fun PreviewTopSection() {
     TopSection(title = "Sign In", subtitle = "Find your best ever meal")
 }
 
 @Preview
 @Composable
-fun PreviewTopSectionIcon() {
+private fun PreviewTopSectionIcon() {
     TopSection(
         title = "Sign In",
         subtitle = "Find your best ever meal",
         icon = Icons.Default.ArrowBackIos,
-        onClick = {}
+        iconOnClick = {}
     )
 }
 
 @Preview
 @Composable
-fun PreviewTopSectionImage() {
+private fun PreviewTopSectionImage() {
     TopSection(
         title = "Sign In",
         subtitle = "Find your best ever meal",
         image = R.drawable.audrey_fretz_kyuityoae9m_unsplash,
-        onClick = {}
+        imageOnClick = {}
     )
 }
