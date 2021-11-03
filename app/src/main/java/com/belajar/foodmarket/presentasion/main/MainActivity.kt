@@ -6,6 +6,7 @@ import androidx.activity.compose.setContent
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -104,7 +105,7 @@ private fun BottomNavBar(navController: NavHostController, itemNavigation: List<
                     }
                 },
                 selectedContentColor = MaterialTheme.colors.primary,
-                unselectedContentColor = Manatee
+                unselectedContentColor = Color.LightGray
             )
         }
     }

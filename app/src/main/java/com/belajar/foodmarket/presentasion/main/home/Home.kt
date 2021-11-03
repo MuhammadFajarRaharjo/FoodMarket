@@ -26,9 +26,7 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.belajar.foodmarket.R
 import com.belajar.foodmarket.presentasion.Screen
-import com.belajar.foodmarket.presentasion.component.ItemFood
-import com.belajar.foodmarket.presentasion.component.RatingStar
-import com.belajar.foodmarket.presentasion.component.TopSection
+import com.belajar.foodmarket.presentasion.component.*
 import com.belajar.foodmarket.presentasion.ui.theme.FoodMarketTheme
 import com.belajar.foodmarket.presentasion.ui.theme.Manatee
 import com.belajar.foodmarket.presentasion.ui.theme.Shapes
@@ -52,7 +50,6 @@ fun Home(navController: NavController) {
     ) {
         val pagerState = rememberPagerState()
         val list = listOf("New Taste", "Popular", "Recommended")
-        val scope = rememberCoroutineScope()
         val lazyState = rememberLazyListState()
 
         LazyColumn(state = lazyState, contentPadding = PaddingValues(bottom = 50.dp)) {
@@ -77,98 +74,62 @@ fun Home(navController: NavController) {
             }
 
             item {
-                ScrollableTabRow(
-                    selectedTabIndex = pagerState.currentPage,
-                    indicator = { tabPosition ->
-                        TabRowDefaults.Indicator(
-                            modifier = Modifier
-                                .tabIndicatorOffset(tabPosition[pagerState.currentPage])
-                                .padding(horizontal = 29.dp)
-                                .clip(CircleShape),
-                            height = 3.dp
-                        )
-                    },
+                ScrollableTabPagerHorizontal(
+                    pagerState = pagerState,
+                    list = list,
                     edgePadding = 11.dp,
-                    modifier = Modifier.fillMaxWidth(),
-                    backgroundColor = MaterialTheme.colors.surface
-                ) {
-                    list.forEachIndexed { index, s ->
-                        Tab(
-                            selected = pagerState.currentPage == index,
-                            onClick = { scope.launch { pagerState.animateScrollToPage(index) } },
-                            text = { Text(text = s, style = MaterialTheme.typography.button) }
-                        )
-                    }
-                }
-
-                HorizontalPager(
-                    count = list.size,
-                    state = pagerState,
-                    verticalAlignment = Alignment.Top
+                    paddingIndicator = PaddingValues(horizontal = 29.dp)
                 ) { page ->
-                    Column(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .background(MaterialTheme.colors.surface)
-                            .padding(start = 24.dp, end = 24.dp, bottom = 24.dp)
-                    ) {
-                        when (page) {
-                            0 -> {
-                                repeat(20) {
-                                    ItemFood(
-                                        modifier = Modifier.padding(top = 16.dp),
-                                        onClick = { navController.navigate(Screen.FoodDetail.route) },
-                                        text = "Food No. $it",
-                                        subtitle = "IDR: 25.000",
-                                        image = R.drawable.image_example_food
-                                    ) {
-                                        RatingStar(rating = it + 1)
-                                        Spacer(modifier = Modifier.width(5.dp))
-                                        Text(
-                                            text = (it + 1f).toString(),
-                                            style = MaterialTheme.typography.caption.copy(fontSize = 13.sp),
-                                            color = Manatee
-                                        )
-                                    }
-                                }
+                    when (page) {
+                        0 -> repeat(5) {
+                            ItemFood(
+                                modifier = Modifier.padding(top = 16.dp),
+                                onClick = { navController.navigate(Screen.FoodDetail.route) },
+                                text = "Food No. $it",
+                                subtitle = "IDR: 25.000",
+                                image = R.drawable.image_example_food
+                            ) {
+                                RatingStar(rating = it + 1)
+                                Spacer(modifier = Modifier.width(5.dp))
+                                Text(
+                                    text = (it + 1f).toString(),
+                                    style = MaterialTheme.typography.caption.copy(fontSize = 13.sp),
+                                    color = Manatee
+                                )
                             }
-                            1 -> {
-                                repeat(10) {
-                                    ItemFood(
-                                        modifier = Modifier.padding(top = 16.dp),
-                                        onClick = { navController.navigate(Screen.FoodDetail.route) },
-                                        text = "Food No. $it",
-                                        subtitle = "IDR: 25.000",
-                                        image = R.drawable.image_example_food
-                                    ) {
-                                        RatingStar(rating = page + 1)
-                                        Spacer(modifier = Modifier.width(5.dp))
-                                        Text(
-                                            text = (page + 1).toString(),
-                                            style = MaterialTheme.typography.caption.copy(fontSize = 13.sp),
-                                            color = Manatee
-                                        )
-                                    }
-                                }
+                        }
+                        1 -> repeat(10) {
+                            ItemFood(
+                                modifier = Modifier.padding(top = 16.dp),
+                                onClick = { navController.navigate(Screen.FoodDetail.route) },
+                                text = "Food No. $it",
+                                subtitle = "IDR: 25.000",
+                                image = R.drawable.image_example_food
+                            ) {
+                                RatingStar(rating = page + 1)
+                                Spacer(modifier = Modifier.width(5.dp))
+                                Text(
+                                    text = (page + 1).toString(),
+                                    style = MaterialTheme.typography.caption.copy(fontSize = 13.sp),
+                                    color = Manatee
+                                )
                             }
-                            2 -> {
-                                repeat(5) {
-                                    ItemFood(
-                                        modifier = Modifier.padding(top = 16.dp),
-                                        onClick = { navController.navigate(Screen.FoodDetail.route) },
-                                        text = "Food No. $it",
-                                        subtitle = "IDR: 25.000",
-                                        image = R.drawable.image_example_food
-                                    ) {
-                                        RatingStar(rating = page + 1)
-                                        Spacer(modifier = Modifier.width(5.dp))
-                                        Text(
-                                            text = (page + 1).toString(),
-                                            style = MaterialTheme.typography.caption.copy(fontSize = 13.sp),
-                                            color = Manatee
-                                        )
-                                    }
-                                }
+                        }
+                        2 -> repeat(5) {
+                            ItemFood(
+                                modifier = Modifier.padding(top = 16.dp),
+                                onClick = { navController.navigate(Screen.FoodDetail.route) },
+                                text = "Food No. $it",
+                                subtitle = "IDR: 25.000",
+                                image = R.drawable.image_example_food
+                            ) {
+                                RatingStar(rating = page + 1)
+                                Spacer(modifier = Modifier.width(5.dp))
+                                Text(
+                                    text = (page + 1).toString(),
+                                    style = MaterialTheme.typography.caption.copy(fontSize = 13.sp),
+                                    color = Manatee
+                                )
                             }
                         }
                     }

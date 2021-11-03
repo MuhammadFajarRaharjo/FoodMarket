@@ -14,8 +14,10 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import com.belajar.foodmarket.R
 import com.belajar.foodmarket.presentasion.Screen
 import com.belajar.foodmarket.presentasion.component.ButtonCustom
@@ -93,37 +95,33 @@ private fun OrderExist(navController: NavHostController) {
                     paddingIndicator = PaddingValues(horizontal = 50.dp)
                 ) { page ->
                     when (page) {
-                        0 -> {
-                            repeat(5) {
-                                ItemFood(
-                                    modifier = Modifier.padding(top = 16.dp),
-                                    onClick = { navController.navigate(Screen.ProgressOrderDetails.route) },
-                                    text = "Food No. $it",
-                                    subtitle = "13 item | IDR: 25.000",
-                                    image = R.drawable.image_example_food
-                                )
-                            }
+                        0 -> repeat(5) {
+                            ItemFood(
+                                modifier = Modifier.padding(top = 16.dp),
+                                onClick = { navController.navigate(Screen.ProgressOrderDetails.route) },
+                                text = "Food No. $it",
+                                subtitle = "13 item | IDR: 25.000",
+                                image = R.drawable.image_example_food
+                            )
                         }
-                        1 -> {
-                            repeat(5) {
-                                ItemFood(
-                                    modifier = Modifier.padding(top = 16.dp),
-                                    onClick = { navController.navigate(Screen.ProgressOrderDetails.route) },
-                                    text = "Food No. $it",
-                                    subtitle = "13 item | IDR: 25.000",
-                                    image = R.drawable.image_example_food
-                                ) {
-                                    Column(verticalArrangement = Arrangement.Center) {
-                                        Text(
-                                            text = "Jun 12 14.00",
-                                            style = MaterialTheme.typography.overline
-                                        )
-                                        Text(
-                                            text = "Canceled",
-                                            style = MaterialTheme.typography.overline,
-                                            color = Color.Red
-                                        )
-                                    }
+                        1 -> repeat(5) {
+                            ItemFood(
+                                modifier = Modifier.padding(top = 16.dp),
+                                onClick = { navController.navigate(Screen.ProgressOrderDetails.route) },
+                                text = "Food No. $it",
+                                subtitle = "13 item | IDR: 25.000",
+                                image = R.drawable.image_example_food
+                            ) {
+                                Column(verticalArrangement = Arrangement.Center) {
+                                    Text(
+                                        text = "Jun 12 14.00",
+                                        style = MaterialTheme.typography.overline
+                                    )
+                                    Text(
+                                        text = "Canceled",
+                                        style = MaterialTheme.typography.overline,
+                                        color = Color.Red
+                                    )
                                 }
                             }
                         }
@@ -132,4 +130,11 @@ private fun OrderExist(navController: NavHostController) {
             }
         }
     }
+}
+
+@ExperimentalPagerApi
+@Preview
+@Composable
+private fun PreviewOrder() {
+    Order(rememberNavController())
 }
